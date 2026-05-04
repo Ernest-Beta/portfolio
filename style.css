@@ -11,19 +11,52 @@ body{
 }
 #header{
     width: 100%;
-    height: 100vh;
-    background-image: url(Photos/background.jpg);
-    background-size: cover;
-    background-position: center;
+    min-height: 100vh;
+    position: relative;
+    overflow: hidden;
+    background:
+        radial-gradient(circle at 50% 35%, rgba(93, 26, 215, 0.16), transparent 34%),
+        radial-gradient(circle at 78% 70%, rgba(31, 178, 184, 0.1), transparent 28%),
+        linear-gradient(135deg, #050509 0%, #080b13 48%, #050509 100%);
+    isolation: isolate;
+}
+#header::before{
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image:
+        linear-gradient(to right, rgba(255,255,255,0.035) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(255,255,255,0.035) 1px, transparent 1px);
+    background-size: 36px 36px;
+    mask-image: linear-gradient(to bottom, rgba(0,0,0,0.85), transparent 88%);
+    opacity: 0.42;
+    z-index: -2;
+}
+#header::after{
+    content: '';
+    position: absolute;
+    inset: auto -15% -35% -15%;
+    height: 60%;
+    background: linear-gradient(90deg, rgba(93, 26, 215, 0.13), rgba(27, 154, 170, 0.08), rgba(140, 5, 225, 0.12));
+    filter: blur(80px);
+    opacity: 0.55;
+    z-index: -1;
 }
 .container{
     padding: 10px 5%;
 }
+#header .container{
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
 nav{
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: flex-end;
     flex-wrap: wrap;
+    position: relative;
+    z-index: 3;
 }
 .logo{
     width: 140px;
@@ -53,19 +86,73 @@ nav ul li a:hover::after{
     width: 100%;
 }
 .header-text{
-    margin-top: 20%;
+    width: min(860px, 100%);
+    margin: auto;
+    padding: 96px 0 86px;
+    text-align: center;
     font-size: 20px;
+    animation: hero-rise 0.75s ease both;
 }
 .header-text h1{
-    font-size: 60px;
-    margin-top: 20px;
+    font-size: clamp(64px, 11vw, 124px);
+    line-height: 0.94;
+    color: #f5f7fb;
+    letter-spacing: 0;
 }
-.header-text h1 span{
-    color: #5d1ad7;
+.header-text h2{
+    margin-top: 24px;
+    color: #aab2c4;
+    font-size: clamp(24px, 3vw, 34px);
+    font-weight: 500;
+    letter-spacing: 0;
 }
-.header-text p span{
-    color: #7a0eb4;
-}  
+.hero-actions{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 14px;
+    margin-top: 42px;
+}
+.hero-btn{
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    min-height: 48px;
+    padding: 13px 20px;
+    border: 1px solid rgba(255,255,255,0.15);
+    border-radius: 8px;
+    color: #fff;
+    text-decoration: none;
+    font-size: 15px;
+    font-weight: 700;
+    line-height: 1;
+    backdrop-filter: blur(14px);
+    transition: transform 0.25s ease, border-color 0.25s ease, background 0.25s ease, box-shadow 0.25s ease;
+}
+.hero-btn i{
+    font-size: 18px;
+}
+.hero-btn:hover{
+    transform: translateY(-3px);
+    border-color: rgba(141, 221, 231, 0.55);
+}
+.hero-btn-primary{
+    background: linear-gradient(135deg, #6d2cff, #17a8bc);
+    box-shadow: 0 18px 45px rgba(93, 26, 215, 0.32);
+}
+.hero-btn-secondary{
+    background: rgba(255,255,255,0.07);
+}
+.hero-btn-ghost{
+    color: #bfc7d8;
+    background: transparent;
+}
+.section-anchor{
+    display: block;
+    height: 0;
+}
 /*---------------------------About-------------------*/
 /* Existing CSS */
 #about {
@@ -370,21 +457,32 @@ copyright i{
 @media only screen and (max-width: 600px){
     
     #header{
-        background-image: url(Photos/phone.jpg);
+        min-height: 100svh;
     }
     .work-list {
         grid-template-columns: 1fr; /* Adjust to one column */
     }
     .header-text{
-        margin-top: 100%;
+        padding: 88px 0 82px;
         font-size: 15px;
     }
     .header-text{
-        margin-top: 100%;
         font-size: 15px;
     }
     .header-text h1{
-        font-size: 30px;
+        font-size: 54px;
+        line-height: 0.98;
+    }
+    .header-text h2{
+        font-size: 28px;
+    }
+    .hero-actions{
+        align-items: stretch;
+        gap: 10px;
+        margin-top: 30px;
+    }
+    .hero-btn{
+        width: 100%;
     }
     .fa-solid{
         display: block;
@@ -443,6 +541,16 @@ copyright i{
     }
     100% {
         background-position: left;
+    }
+}
+@keyframes hero-rise {
+    0% {
+        opacity: 0;
+        transform: translateY(18px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
     }
 }
 html {
