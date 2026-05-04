@@ -6,7 +6,17 @@
 
 }
 body{
-    background: #080808;
+    min-height: 100vh;
+    background-color: #05070d;
+    background-image:
+        radial-gradient(circle at 50% 18%, rgba(93, 26, 215, 0.15), transparent 30rem),
+        radial-gradient(circle at 82% 48%, rgba(23, 168, 188, 0.08), transparent 28rem),
+        linear-gradient(to right, rgba(255,255,255,0.026) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(255,255,255,0.026) 1px, transparent 1px),
+        linear-gradient(135deg, #050509 0%, #080b13 48%, #050509 100%);
+    background-size: auto, auto, 36px 36px, 36px 36px, auto;
+    background-position: center top, right 28rem, center top, center top, center;
+    background-attachment: fixed;
     color: #fff;
 }
 #header{
@@ -14,32 +24,28 @@ body{
     min-height: 100vh;
     position: relative;
     overflow: hidden;
-    background:
-        radial-gradient(circle at 50% 35%, rgba(93, 26, 215, 0.16), transparent 34%),
-        radial-gradient(circle at 78% 70%, rgba(31, 178, 184, 0.1), transparent 28%),
-        linear-gradient(135deg, #050509 0%, #080b13 48%, #050509 100%);
+    background: transparent;
     isolation: isolate;
 }
 #header::before{
     content: '';
     position: absolute;
-    inset: 0;
-    background-image:
-        linear-gradient(to right, rgba(255,255,255,0.035) 1px, transparent 1px),
-        linear-gradient(to bottom, rgba(255,255,255,0.035) 1px, transparent 1px);
-    background-size: 36px 36px;
-    mask-image: linear-gradient(to bottom, rgba(0,0,0,0.85), transparent 88%);
-    opacity: 0.42;
-    z-index: -2;
+    left: 0;
+    right: 0;
+    bottom: -1px;
+    height: 180px;
+    background: linear-gradient(to bottom, transparent, rgba(5, 7, 13, 0.68));
+    pointer-events: none;
+    z-index: -1;
 }
 #header::after{
     content: '';
     position: absolute;
-    inset: auto -15% -35% -15%;
-    height: 60%;
-    background: linear-gradient(90deg, rgba(93, 26, 215, 0.13), rgba(27, 154, 170, 0.08), rgba(140, 5, 225, 0.12));
-    filter: blur(80px);
-    opacity: 0.55;
+    inset: auto -15% -28% -15%;
+    height: 55%;
+    background: linear-gradient(90deg, rgba(93, 26, 215, 0.1), rgba(27, 154, 170, 0.07), rgba(140, 5, 225, 0.1));
+    filter: blur(90px);
+    opacity: 0.5;
     z-index: -1;
 }
 .container{
@@ -295,6 +301,21 @@ nav ul li a:hover::after{
 }*/
 #porotfolio{
     padding: 70px 0;
+    position: relative;
+    background: transparent;
+}
+#porotfolio::before{
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+        linear-gradient(to bottom, rgba(5, 7, 13, 0.04), rgba(5, 7, 13, 0.18) 24%, rgba(5, 7, 13, 0.06) 100%),
+        radial-gradient(circle at 50% 0%, rgba(93, 26, 215, 0.08), transparent 34rem);
+    pointer-events: none;
+}
+#porotfolio .container{
+    position: relative;
+    z-index: 1;
 }
 .work-list{
     display: grid;
